@@ -1,0 +1,59 @@
+{% extends 'paginas/index.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <style>
+
+        .btn {
+            width: 100%;
+            height: fit-content;
+            margin-top: 25px;
+            padding: 3px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="form-container">
+        <div class="form-box">
+
+            <h4>{{titulo}}</h4> <br>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+    
+                {% block user_email %}
+                    <div class="input-field">
+                        {{ form.username }}
+                        <label for="{{ form.username.id_for_label }}">Usuário</label>
+                    </div>
+                {% endblock %}
+
+                {% block senhas %}
+                    {% block senha1 %}
+                        <div class="input-field">
+                            {{ form.password1 }}
+                            <label for="{{ form.password1.id_for_label }}">Senha</label>
+                        </div>
+                    {% endblock %}
+
+                    <div class="input-field">
+                        {{ form.password2 }}
+                        <label for="{{ form.password2.id_for_label }}">Confirmar Senha</label>
+                        {% for error in form.password2.errors %}
+                            <p class="error"> {{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endblock %}
+
+                <button type="submit" class="btn">Confirmar</button>
+            </form> 
+        </div>
+    </div>
+{% endblock %}

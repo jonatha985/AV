@@ -1,0 +1,117 @@
+.container {
+    padding-block: 40px;
+}
+
+#btn_box_list {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-sm {
+    font-weight: 500;
+}
+
+.btn-aniversario {
+    background-color: #068ab3;
+}
+
+.btn-aniversario:hover {
+    background-color: #037a9e;
+}
+
+.btn-add {
+    background-color: #a8ccb6;
+    border-color: #096661;
+    color: #096661;
+    font-size: 14px;
+}
+
+.btn-add:hover {
+    background-color: rgb(112, 192, 168)
+}
+
+.lista-foto {
+    width: 55px;
+}
+
+.foto-box {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.dados-foto {
+    width: 120px;  
+}
+
+.btn-gerar-ficha {
+    font-size: 13px;
+    padding-inline: 15px;
+}
+
+#nome {
+    font-size: 18px;
+    color: #078b85;
+}
+
+.btn-editar {
+    background-color: #a8ccb6;
+    color: #096661;
+}
+
+.btn-add:hover, .btn-editar:hover {
+    color: #064642;
+}
+
+.btn-excluir {
+    background-color: #db8e8e;
+    color: #912c39;
+    border: 0;
+}
+
+.btn-excluir:hover {
+    background-color: #e08a8a;
+    color: #791f2b;
+}
+
+.btn-agenda {
+    background-color: #69a881 !important;
+}
+
+.btn-agenda:hover {
+    background-color: #7cc297 !important;
+}
+
+.opcao {
+    text-align: center;
+}
+
+@media (max-width: 340px) {
+
+    .dados-foto {
+        width: 90px;  
+    }
+
+    .btn-gerar-ficha {
+        font-size: 12px;
+        padding-inline: 12px;
+    }
+
+    .dados h4 {
+        font-size: 28px;
+    }
+
+}
+
+@media (max-width: 304px) {
+
+    .dados-foto {
+        width: 78px;  
+    }
+
+    .dados h4 {
+        font-size: 25px;
+    }
+
+}

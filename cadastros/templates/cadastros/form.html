@@ -1,0 +1,78 @@
+{% extends 'paginas/index.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="form-container">
+        <div class="form-box"> 
+
+            <h5 class="titulo-form">{{titulo}}</h5> <br>
+
+            <form method="POST">
+
+                {% csrf_token %}
+        
+                {% if 'Especialidade' in titulo %}
+                    <div class="input-field">
+                        {{ form.especialidade }}
+                        <label for="{{ form.especialidade.id_for_label }}">Especialidade</label>
+                    </div>
+                    <div class="input-field">
+                        {{ form.valor_consulta }}
+                        <label for="{{ form.especialidade.id_for_label }}">Valor da Consulta</label>
+                    </div>
+                {% elif 'Cargo' in titulo %}
+                    <div class="input-field">
+                        {{ form.nome_cargo }}
+                        <label for="{{ form.nome_cargo.id_for_label }}">Cargo</label>
+                    </div>
+                    <div class="input-field">
+                        {{ form.salario }}
+                        <label for="{{ form.salario.id_for_label }}">Salário</label>
+                    </div>
+                {% elif 'Procedimento' in titulo %}
+                    <div class="input-field">
+                        {{ form.nome_procedimento }}
+                        <label for="{{ form.nome_procedimento.id_for_label }}">Procedimento</label>
+                    </div>
+                    <div class="input-field">
+                        {{ form.especialidade_responsavel }}
+                    </div>
+                    <div class="text-field" id="text-descricao">
+                        <label for="{{ form.descricao.id_for_label }}">Descrição</label>
+                        {{ form.descricao }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.valor_procedimento }}
+                        <label for="{{ form.valor_procedimento.id_for_label }}">Valor</label>
+                    </div>
+                {% endif %}
+
+                <div class="card-action">
+                    <button type="submit" class="btn btn-form">Salvar</button>
+                </div>
+        
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        M.AutoInit();
+    </script>
+
+<script>
+    $(document).ready(function() {
+        
+    });
+</script>
+{% endblock %}

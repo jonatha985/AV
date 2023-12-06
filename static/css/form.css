@@ -1,0 +1,96 @@
+h3 {
+    color: #11918a;
+}
+
+.titulo-form {
+    color: #096661;
+    text-align: center;
+}
+
+form {
+    position: relative;
+}
+
+.form-box {
+    width: fit-content;
+    min-width: 320px;
+    background-color: #fff;
+    padding-top: 10px;
+    padding-inline: 40px;
+    padding-bottom: 50px;
+    border-radius: 2px;
+}
+
+#imagem-preview {
+    max-width: 140px;
+    max-height: 140px;
+    cursor: pointer;
+}
+
+#add-photo {
+    position: absolute;
+    left: 115px;
+    top: 155px;
+    font-size: 25px;
+    color: #096661;
+    background-color: #a8ccb6;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.nome-field {
+    margin-inline: 10px;
+}
+
+input, textarea {
+    outline: 0;
+    padding-inline: 5px;
+    padding-block: 3px;
+}
+
+textarea {
+    resize: none;
+    padding: 8px;
+}
+
+#text-descricao label {
+    font-size: 15px;
+}
+
+#text-descricao textarea {
+    height: 60px;
+}
+
+#info-med {
+    font-size: 16px;
+    margin-left: -120px;
+}
+
+input:focus, textarea:focus {
+    box-shadow: none;
+    outline: 0;
+}
+
+#id_informacoes_medicas {
+    width: 208%;
+    height: 80px;
+} 
+
+.file-field {
+    display: none;
+}
+
+.btn-form {
+    min-width: 100px;
+    justify-self: center;
+    margin-top: 5px;
+}
+
+.error {
+    font-size: 15px;
+    color: #d84343;
+    position: absolute;
+}
+
+
+

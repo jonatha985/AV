@@ -1,0 +1,19 @@
+{% extends 'cadastros/form_medico.html' %}
+
+{% load static %}
+
+{% block estilo_form %}
+    
+{% endblock %}
+
+{% block crm %}
+
+{% endblock %}
+
+{% block campo_direfente %}
+    <div class="text-field col s4">
+        <label id="info-med" for="{{ form.informacoes_medicas.id_for_label }}">Informações Médicas</label>
+        {{ form.informacoes_medicas }}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,226 @@
+{% extends 'paginas/index.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+
+    <style>
+
+        #imagem-preview {
+            justify-self: flex-start;
+            align-self: flex-start;
+            border-radius: 100%;
+        }
+
+        #imagem-preview img {
+            border-radius: 100%;
+        }
+
+        .card-action {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            width: 140px;
+        }
+
+    </style>
+
+    {% block estilo_form %}
+
+    {% endblock %}
+{% endblock %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-content" style="text-align: center">
+        <span class="card-title">{{titulo}}</span>
+            
+        <label for="{{ form.foto.id_for_label }}" id="imagem-preview">
+            <img id="imagem-selecionada" src="{% static 'img/perfil-generico.jpg' %}" alt="Imagem do Paciente" style="max-width: 140px; max-height: 140px;">
+            <span id="add-photo" class="icons material-symbols-outlined">Add_A_Photo</span>
+        </label>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% block campos %}
+            <div class="input-field nome-field">
+                {{ form.nome_completo }}
+                <label for="{{ form.nome_completo.id_for_label }}">Nome completo</label>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s4">
+                    <!-- {{ form.data_nascimento }} -->
+                    <input type="date" id="{{ form.data_nascimento.id }}" name="{{ form.data_nascimento.name }}" value="{{ form.data_nascimento.value|date:'Y-m-d' }}">
+                    <label for="{{ form.data_nascimento.id_for_label }}">Data de Nascimento</label>
+                </div>
+
+                <div class="input-field col s4">
+                    {{ form.rg }}
+                    <label for="{{ form.rg.id_for_label }}">RG</label>
+                </div>
+                
+                <div class="input-field col s4">
+                    {{ form.cpf }}
+                    <label for="{{ form.cpf.id_for_label }}">CPF</label>
+                </div>
+
+                {% block crm %}
+                    <div class="input-field col s4">
+                        {{ form.crm }}
+                        <label for="{{ form.crm.id_for_label }}">CRM</label>
+                    </div>
+                {% endblock %}
+
+                <div class="input-field col s4">
+                    {{ form.sexo }}
+                </div>
+
+                <div class="input-field col s4">
+                    {{ form.endereco.rua }}
+                    <label for="{{ form.rua.id_for_label }}">Rua</label>
+                </div>
+                
+                <div class="input-field col s4">
+                    {{ form.endereco.numero }}
+                    <label for="{{ form.numero.id_for_label }}">Número</label>
+                </div>
+                
+                <div class="input-field col s4">
+                    {{ form.endereco.bairro }}
+                    <label for="{{ form.bairro.id_for_label }}">bairro</label>
+                </div>
+                
+                <div class="input-field col s4">
+                    {{ form.endereco.cidade }}
+                    <label for="{{ form.cidade.id_for_label }}">Cidade</label>
+                </div>
+
+                <div class="input-field col s4">
+                    {{ form.telefone }}
+                    <label for="{{ form.telefone.id_for_label }}">Telefone</label>
+                </div>
+                
+                <div class="input-field col s4">
+                    {{ form.email }}
+                    <label for="{{ form.email.id_for_label }}">E-mail</label>
+                </div>
+
+                {% block campos_extras %}
+
+                {% endblock %}
+
+                {% block campo_direfente %}
+                    <div class="select-field col s4">
+                        {{ form.especialidade }}
+                    </div>
+                {% endblock %}
+            </div>  
+            
+            <div class="file-field input-field">
+                {{ form.foto }}
+            </div>
+            {% endblock%} 
+            <div class="card-action">
+                <button class="btn waves-effect waves-light" type="submit">Salvar</button>
+                <button class="btn waves-effect waves-light" type="reset">Cancelar</button>
+            </div>
+        </form> 
+    </div>
+</div>
+
+{% if endereco_inicial %}
+    <script>
+        var modoEdicao = true;
+    </script>  
+{% else %} 
+    <script>
+        var modoEdicao = false;
+    </script>
+{% endif %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+    <script>
+        // Inicialize os elementos do Materialize, se necessário
+        M.AutoInit();
+    </script>
+
+    <script>
+        // Inicialize os elementos do Materialize, se necessário
+        M.AutoInit();
+
+        // Função para mostrar a imagem selecionada
+
+        const foto = document.getElementById('id_foto');
+
+        foto.addEventListener('change', function() {
+            const inputFoto = document.getElementById('id_foto');
+            const imagemPreview = document.getElementById('imagem-preview');
+            const imagemSelecionada = document.getElementById('imagem-selecionada');
+
+            if (inputFoto.files && inputFoto.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagemSelecionada.src = e.target.result;
+                    imagemPreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(inputFoto.files[0]);
+            } else {
+                imagemSelecionada.src = '#';
+                imagemPreview.style.display = 'none';
+            }
+        })
+    </script> 
+
+    <script>
+        $(document).ready(function() {
+
+            // $('.data-mask').mask('00/00/0000');
+            $('.rg-mask').mask('00.000.000-00');
+            $('.cpf-mask').mask('000.000.000-00');
+            $('.crm-mask').mask('CRM/AA 000000');
+            var telefoneMask = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            }, 
+            telOptions = {
+                onKeyPress: function(val, e, field, options) {
+                    field.mask(telefoneMask.apply({}, arguments), options);
+                    }
+            };
+            $('.telefone-mask').mask(telefoneMask, telOptions);
+
+            if (modoEdicao) {
+                $('#id_rua').val('{{ endereco_inicial.rua }}');
+                $('#id_rua').focus();
+                $('#id_numero').val('{{ endereco_inicial.numero }}');
+                $('#id_numero').focus();
+                $('#id_bairro').val('{{ endereco_inicial.bairro }}');
+                $('#id_bairro').focus();
+                $('#id_cidade').val('{{ endereco_inicial.cidade }}');
+                $('#id_cidade').focus(); $('#id_cidade').blur();
+                var foto = '{{foto.foto}}';
+                if (foto) {
+                    $('#imagem-selecionada').attr("src","/media/" + foto);
+                } 
+            }
+
+        });
+
+    </script>
+
+{%endblock %}
+
+
+</body>
+</html>
